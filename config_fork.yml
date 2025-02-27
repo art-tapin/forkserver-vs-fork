@@ -1,0 +1,15 @@
+version: 2
+service:
+  process_manager_cls: "ProcessManager"   # uses the default 'fork'
+  pool_kwargs:
+    max_workers: 20                       # bigger number => more dramatic FD difference
+brokers:
+  pg_notify:
+    config:
+      conninfo: dbname=postgres user=postgres password=postgres host=localhost port=5432
+    channels:
+      - test_channel
+    default_publish_channel: test_channel
+publish:
+  default_broker: pg_notify
+
